@@ -68,8 +68,8 @@ To access container log in the command use this code
 ```sh
 docker logs -f pos-app
 ```
-
-
+After docker containerization, Go to web browser and open :
+https://localhost:8000/
 
 ## Features
 
