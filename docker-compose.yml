@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: athul@22
+      MYSQL_DATABASE: myposdata
+      MYSQL_USER: root1
+      MYSQL_PASSWORD: athul@22
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+  web:
+    build:
+      context: .  # Use the current directory as the build context
+      dockerfile: Dockerfile  # Path to your Django project's Dockerfile
+    container_name: pos-app
+    command: sh -c "sh /app/entrypoint.sh"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=myposdata
+      - DB_USER=root1
+      - DB_PASSWORD=athul@22
+      - DJANGO_SUPERUSER_PASSWORD=qwerty
+      - DJANGO_SUPERUSER_USERNAME=athul2205
+      - DJANGO_SUPERUSER_EMAIL=athul2205@gmail.com
+    volumes:
+      - ./tmp:/tmp
+

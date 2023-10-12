@@ -1,0 +1,25 @@
+# Exclude common development and version control files
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.bak
+*.swp
+*.swo
+*.swn
+*.swm
+*.sublime-*
+*.vscode
+
+# Exclude Django-specific development files and directories
+settings/__pycache__
+migrations/__pycache__
+*.git
+*.gitignore
+*.idea
+
+# Exclude the 'app' directory
+/app/
