@@ -17,7 +17,30 @@ Containerization     :     Docker
 ```
 <br/>
 
-## How to setup : 
+## How to setup :
+
+Change the directory to the location where you want the cloned directory.   
+Open Gitbash 
+
+#### Clone The Github Repository :
+```
+git clone https://github.com/AthulkrishnaKp/Dockerized_Django_MyPOS_System.git
+```
+Press Enter to create your local clone 
+```
+$ git clone https://github.com/AthulkrishnaKp/Dockerized_Django_MyPOS_System.git
+Cloning into 'Dockerized_Django_MyPOS_System'...
+remote: Enumerating objects: 1945, done.
+remote: Counting objects: 100% (1945/1945), done.
+remote: Compressing objects: 100% (1729/1729), done.
+remote: Total 1945 (delta 210), reused 1945 (delta 210), pack-reused 0
+Receiving objects: 100% (1945/1945), 5.39 MiB | 1.18 MiB/s, done.
+Resolving deltas: 100% (210/210), done.
+```
+
+Open Cmd  
+#### Docker :   
+ 
 The project is designed to run with a single comand if you already have docker installed and is ready for production with just a few minimal changes. 
 The main django app is build during the docker compose up command and the mysql is also setup with the same command
 ```sh
