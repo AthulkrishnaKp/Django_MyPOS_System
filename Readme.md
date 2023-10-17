@@ -54,9 +54,9 @@ The dockerfile copies an entrypoint script into the container that is run during
 
 * If Superuser details not manually provided Default Superuser Data Parsed automatically is:   
 ```sh 
-        Username : athul       
-        Password : password       
-        Email    : athul@example.com      
+        Username : athul2205       
+        Password : qwerty      
+        Email    : athul2205@gmail.com      
 ```  
 
 Each subsequent docker compose up will not trigger a django migration nor a django super user creation it simply runs the django server . 
