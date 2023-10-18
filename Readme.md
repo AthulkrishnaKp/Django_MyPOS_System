@@ -50,9 +50,9 @@ docker compose up -d --build
 ```
 The first command can be used for first time setup and subsequent runs but for the new code to push into the container you need to rebuilt the container.   
 The dockerfile copies an entrypoint script into the container that is run during each up process.    
-#### *<strong>It contains a simple script that checks the availability of mysqlserver before trying to migrate the models and then create a Superuser account automatically, the values for the superuser credentials can be mannualy passed or passed as environment variables.</strong>*  
+#### *<strong>It contains a simple script that checks the availability of mysqlserver before trying to migrate the models and then create a Superuser account automatically, the values for the superuser credentials are mannualy passed or passed as environment variables.</strong>*  
 
-* If Superuser details not manually provided Default Superuser Data Parsed automatically is:   
+* Default Superuser Data Parsed automatically is:
 ```sh 
         Username : athul2205       
         Password : qwerty      
