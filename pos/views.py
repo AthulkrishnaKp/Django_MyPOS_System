@@ -27,8 +27,8 @@ def signin_required(fn):
 decs=[signin_required,never_cache]
 
 
-
-decs
+@signin_required
+@never_cache
 def signout_view(request,*args,**kwargs):
     logout(request)
     messages.success(request,"User Logged out")
@@ -150,20 +150,29 @@ class POSView(CreateView,ListView):
         form=SalesItemsForm(request.POST)
         if form.is_valid():  
             product_id=form.cleaned_data.get("product_id")
-            qty=form.cleaned_data.get("qty")        
-            # price=product_id.price
-            # total=price*qty 
-            # SalesItems.objects.create(product_id=product_id,qty=qty,price=price,total=total)                                         
-            if product_id.status == 1:
-                price = product_id.price
-                total = price * qty
-                SalesItems.objects.create(product_id=product_id, qty=qty, price=price, total=total)
-            else:
-                messages.error(self.request, 'Product is inactive, Sale cant be proceeded !')
-                return redirect("pos")          
+            qty=form.cleaned_data.get("qty")   
+            if qty == 0:
+                messages.error(self.request,'Enter quantity of Product !')   
+            else:      
+                existing_sale = SalesItems.objects.filter(product_id=product_id).exists() 
+                if existing_sale:
+                    messages.error(self.request,'Product already Added !')
+                elif product_id.status == 1:
+                    price = product_id.price
+                    total = price * qty
+                    SalesItems.objects.create(product_id=product_id, qty=qty, price=price, total=total)
+                else:
+                    messages.error(self.request, 'Product is inactive, Sales cant be proceeded !')
+                    return redirect("pos")
             return redirect("pos")           
         else:
             return redirect("pos")
+            
+            # price=product_id.price
+            # total=price*qty 
+            # SalesItems.objects.create(product_id=product_id,qty=qty,price=price,total=total)                                         
+            
+            
 
 @method_decorator(decs,name="dispatch")  
 class BillView(ListView):        
@@ -277,7 +286,9 @@ class SalesAllDeleteView(View):
             return HttpResponseForbidden("You do not have permission for performing this Action")           
         return super().dispatch(request, *args, **kwargs)
 
-decs   
+
+@signin_required
+@never_cache 
 def sales_report(request):
     today = datetime.now().strftime('%Y-%m-%d')
     sales = Sales.objects.filter(date_added=today) 
